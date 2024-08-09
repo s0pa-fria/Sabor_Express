@@ -38,8 +38,9 @@ def main():
     os.system('cls') # Limpa a tela (funciona apenas para Windows)
     exibir_nome_do_programa()
     exibir_opcoes()
-    #escolher_opcao()
-if __name__=='__main__':
+    escolher_opcao()
+
+if __name__ == '__main__':
     main()
 
 # Funções principais do programa:
@@ -64,9 +65,11 @@ def cadastrar_novo_restaurante():
     voltar_ao_menu_principal()
 
     def alternar_estado_do_restaurante():
-        """Função para ativar ou desativar um restaurante"""
+        """
+        Função para ativar ou desativar um restaurante
+        """
         exibir_subtitulo('Alternando estado do restaurante\n')
-        nome_do_restaurante = input('Digite o nome do restaurante que deseja alterar o estado: ')
+        nome_restaurante = input('Digite o nome do restaurante que deseja alterar o estado: ')
         restaurante_encontrado = False
 
         for restaurante in restaurantes:
@@ -92,3 +95,22 @@ def listar_restaurante():
         print(f'-{nome_restaurante.ljust(20)} | {categoria.ljust(20)} | {ativo}')
     
     voltar_ao_menu_principal()
+
+# Função de escolha de opção:
+def escolher_opcao():
+    """Função para processar a escolha do usuário no menu principal"""
+    try:
+        opcao_escolhida = int(input('Escolha uma opção: '))
+
+        if opcao_escolhida == 1:
+            cadastrar_novo_restaurante()
+        elif opcao_escolhida == 2:
+            listar_restaurante()
+        elif opcao_escolhida == 3:
+            alternar_estado_do_restaurante()
+        elif opcao_escolhida == 4:
+            finalizar_app()
+        else:
+            opcao_invalida()
+    except:
+        opcao_invalida()
