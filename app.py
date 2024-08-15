@@ -178,4 +178,3 @@ def listar_restaurantes():
         print(f'-{nome_restaurante.ljust(20)} | {categoria.ljust(20)} | {ativo}')
 
     voltar_ao_menu_principal()
-    
