@@ -111,5 +111,23 @@ def habilitar_restaurante():
     print("Restaurante não encontrado.")    
 
 # Função para alterar as informações de um restaurante
-def alterar_restaurante():
+def avaliar_restaurante():
     nome = input("Digite o nome do restaurante que deseja avaliar: ")
+    for restaurante in Restaurante.restaurantes:
+        if restaurante._nome.lower() == nome.lower():
+            cliente = input("Digite seu nome: ")
+            while True:
+                try:
+                    nota = float(input("Digite a nota (de 0 a 10):"))
+                    if 0 <= nota <= 10:
+                        restaurante.receber_avaliacao(cliente, nota)
+                        print("Avaliação registrada com sucesso!")
+                        salvar_dados()
+                        return
+                    else:
+                        print("A nota deve estar entre 0 e 10.")
+                except ValueError:
+                    print("Por favor, digite um número válido.")
+    print("Restaurante não encontrado")
+
+    
