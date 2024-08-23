@@ -47,3 +47,69 @@ def salvar_dados():
     with open(ARQUIVO_DADOS, 'w', encoding='utf-8') as arquivo:
         json.dump(dados, arquivo, indent=4, ensure_ascii=False) # Salva os dados no arquivo com indentação para melhor leitura
 
+# Função principal do programa, que exibe o menu e executa as ações selecionadas
+def main():
+    carregar_dados()
+
+    while True:
+        os.system('cls' if os.name == 'nt' else 'clear') # Limpa a tela antes de exibir o menu
+        print("=-=-=-=-= Restaurante Expresso =-=-=-=-=")
+        print("\n1. Cadastrar restaurante")
+        print("2. Listar restaurante")
+        print("3. Habilitar restaurante")
+        print("4. Avaliar restaurante")
+        print("5. Alterar restaurante")
+        print("6. Excluir restaurante")
+        print("7. Sair")
+
+        opcao = input("\nEscolha uma opção:")
+
+        # Chama a função correspondente à opção escolhida
+        if opcao == '1':
+            cadastrar_restaurante()
+        elif opcao == '2':
+            listar_restaurante()
+        elif opcao == '':
+            habilitar_restaurante()
+        elif opcao == '':
+            avaliar_restaurante()
+        elif opcao == '':
+            alterar_restaurante()
+        elif opcao == '':
+            excluir_restaurante()
+        elif opcao == '':
+            salvar_dados() # Salva os dados antes de sair
+            print("\nDados salvos. Obrigado por usar o sistema. Até logo!")
+            break
+        else:
+            print("Opção inválida. Tente novamente.")
+        
+        input("\nPressione Enter para continuar...")
+
+# Função para cadastrar um novo restaurante
+def cadastrar_restaurante():
+    nome = input("Digite o nome do restaurante: ")
+    categoria = input("Digite a categoria do restaurante: ")
+    novo_restaurante = Restaurante(nome, categoria)
+    print(f"\nRestaurante {nome} cadastrado com sucesso!")
+    salvar_dados
+
+# Função para listar todos os restaurantes cadastrados
+def listar_restaurante():
+    print("Lista de Restaurantes:")
+    Restaurante.listar_restaurantes()
+
+# Função para habilitar ou desabilitar um restaurante
+def habilitar_restaurante():
+    nome = input("Digite o nome do restaurante que deseja habilitar/desabilitar: ")
+    for restaurante in Restaurante.restaurantes:
+        if restaurante._nome.lower() == nome.lower():
+            restaurante.alternar_estado()
+            print(f"Estado do restaurante {restaurante._nome} alterado para {restaurante.ativo}")
+            salvar_dados()
+            return
+    print("Restaurante não encontrado.")    
+
+# Função para alterar as informações de um restaurante
+def alterar_restaurante():
+    nome = input("Digite o nome do restaurante que deseja avaliar: ")
