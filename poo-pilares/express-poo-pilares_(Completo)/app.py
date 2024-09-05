@@ -24,6 +24,7 @@ def carregar_dados():
             dados = json.load(arquivo)
             Estabelecimento.estabelecimentos.clear()  # Limpa a lista de estabelecimentos antes de carregar os novos dados
             for estabelecimento_dados in dados:
+                # !!POLIMORFISMO!!
                 if estabelecimento_dados['tipo'] == 'Restaurante':
                     estabelecimento = Restaurante(
                         estabelecimento_dados['nome'],
@@ -117,7 +118,7 @@ def habilitar_estabelecimento():
     nome = input("Digite o nome do estabelecimento que deseja habilitar/desabilitar: ")
     for estabelecimento in Estabelecimento.estabelecimentos:
         if estabelecimento._nome.lower() == nome.lower():
-            estabelecimento.alternar_estado()  # Altera o estado do estabelecimento (ativo/inativo)
+            estabelecimento.alternar_estado()  # Altera o estado do estabelecimento (ativo/inativo) METODO POLIMORFICO
             print(f"Estado do estabelecimento {estabelecimento._nome} alterado para {estabelecimento.ativo}")
             salvar_dados()  # Salva os dados após a alteração
             return
